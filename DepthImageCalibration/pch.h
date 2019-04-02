@@ -10,5 +10,13 @@
 #define PCH_H
 
 // TODO: ここでプリコンパイルするヘッダーを追加します
+#include <opencv2/opencv.hpp>
+
+#include <Windows.h>
+#include <stdexcept>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
 
 #endif //PCH_H
