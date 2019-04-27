@@ -40,7 +40,8 @@ bool plot_corner_sub(cv::Mat& img, cv::Size& size, std::vector<cv::Point2f>& img
 
     cv::setMouseCallback(window_name, mFunc, &mouseEvent);
     cv::Scalar scalar1(0, 255, 0);
-    cv::Scalar scalar2(0, 150, 150);
+    cv::Scalar scalar2(0, 0, 255);
+	cv::resize(img, img, cv::Size(img.rows * 2, img.cols * 2));
 
     for (int i = 0; i < size.height; i++)
     {
@@ -60,10 +61,11 @@ bool plot_corner_sub(cv::Mat& img, cv::Size& size, std::vector<cv::Point2f>& img
                     cv::circle(img, point, 10, scalar1);
                     if (0 < img_corner.size())
                     {
-                        cv::Point last = img_corner[img_corner.size() - 1];
+                        cv::Point last = img_corner[img_corner.size() - 1] * 2;
                         cv::line(img, point, last, scalar2);
                     }
-                    img_corner.push_back(point);
+					cv::Point true_point = point / 2;
+                    img_corner.push_back(true_point);
                     clicked = true;
                 }
 

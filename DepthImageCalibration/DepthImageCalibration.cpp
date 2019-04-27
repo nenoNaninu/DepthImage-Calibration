@@ -18,9 +18,9 @@ int main(int argc, char* argv[])
 
     std::string dir_path = argv[1];
 
-    int corner_width = atoi(argv[2]);
-    int corner_height = atoi(argv[3]);
-    int square_scale = atoi(argv[4]);
+    int corner_width   = std::atoi(argv[2]);
+    int corner_height  = std::atoi(argv[3]);
+    float square_scale = std::atof(argv[4]);
 
     std::vector<std::string> img_file_names = get_image_file_name(dir_path);
     
@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
     {
         for (int i = 0, n = img_file_names.size(); i < n; i++)
         {
+			img_corner = std::vector<Point2f>();
             Mat mat = imread(dir_path + "\\" + img_file_names[i]);
             if (i == 0)
             {
@@ -77,6 +78,16 @@ int main(int argc, char* argv[])
     write_camera_matrix(camera_matrix, "camera_matrix.csv");
     write_dist_coeffs_matrix(dist_coeffs, "dist_coeffs.csv");
 
+	for (int i = 0, n = img_file_names.size(); i < n; i++)
+	{
+		Mat mat = imread(dir_path + "\\" + img_file_names[i]);
+		Mat dst;
+		undistort(mat, dst, camera_matrix, dist_coeffs);
+
+		imshow("補正画像", dst);
+		waitKey(0);
+	}
+	
     return 0;
 }
 
