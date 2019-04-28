@@ -78,6 +78,8 @@ int main(int argc, char* argv[])
     write_camera_matrix(camera_matrix, "camera_matrix.csv");
     write_dist_coeffs_matrix(dist_coeffs, "dist_coeffs.csv");
 
+	cv::destroyAllWindows();
+	
 	for (int i = 0, n = img_file_names.size(); i < n; i++)
 	{
 		Mat mat = imread(dir_path + "\\" + img_file_names[i]);
